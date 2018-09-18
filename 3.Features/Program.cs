@@ -11,21 +11,6 @@ namespace _3.Features
     {
         static void Main(string[] args)
         {
-            //Func<int, int> square = x => x * x;
-            //Console.WriteLine(square(3));
-
-            //Func<int, int, int> add = (x, y) => x + y;
-            //Console.WriteLine(add(3, 4));
-
-            //Func<int, int, int> subtraction = (x, y) =>
-            //{
-            //    int temp = x - y;
-            //    return temp;
-            //};
-            //Console.WriteLine(subtraction(5,2));
-
-
-            // ---------------------------
             var developers = new Employee[]
             {
                 new Employee { Id = 1, Name = "Scott" },
@@ -37,17 +22,21 @@ namespace _3.Features
                 new Employee { Id=3, Name = "Alex" }
             };
 
-            foreach (var employee in developers.Where(e => e.Name.Length == 5)
-                                               .OrderBy(e => e.Name))
+
+            var query = developers.Where(e => e.Name.Length == 5)
+                                               .OrderBy(e => e.Name);
+
+            var query2 = from developer in developers
+                         where developer.Name.Length == 5
+                         orderby developer.Name
+                         select developer;
+
+
+            foreach (var employee in query2)
             {
                 Console.WriteLine(employee.Name);
             }
 
-            //IEnumerator<Employee> enumerator = developers.GetEnumerator();
-            //while (enumerator.MoveNext())
-            //{
-            //    Console.WriteLine(enumerator.Current.Name);
-            //}
         }
     }
 }
